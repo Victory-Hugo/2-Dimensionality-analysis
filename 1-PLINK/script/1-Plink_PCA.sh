@@ -8,22 +8,25 @@
 set -e
 
 # 定义输入和输出路径
-INPUT_VCF="/mnt/d/幽门螺旋杆菌/Script/分析结果/merged_vcf/filter/二等位_核心SNP_99genomes_修正_bgzip.仅包括hpEAsia.vcf.gz"
-OUTPUT_DIR="/mnt/d/幽门螺旋杆菌/Script/分析结果/plink/排除非洲外群_二等位_核心SNP_99genomes_仅包括hpEAsia"
+INPUT_VCF="/mnt/d/幽门螺旋杆菌/Script/分析结果/1-序列处理流/output/merge/merged_biallelic_7544_re.NoN.vcf.gz"
+OUTPUT_DIR="/mnt/d/幽门螺旋杆菌/Script/分析结果/3-PCA/7544_整体"
 mkdir -p "$OUTPUT_DIR"
 PLINK_PREFIX="${OUTPUT_DIR}/filtered"
-PCA_OUTPUT_DIR="/mnt/d/幽门螺旋杆菌/Script/分析结果/PCA/排除非洲外群_二等位_核心SNP_99genomes_仅包括hpEAsia"
+PCA_OUTPUT_DIR="/mnt/d/幽门螺旋杆菌/Script/分析结果/3-PCA/7544_整体"
 mkdir -p "$PCA_OUTPUT_DIR"
 
 # 将 VCF 转换为 PLINK 二进制格式
 echo "将 VCF 转换为 PLINK 二进制格式"
-plink --vcf "$INPUT_VCF" --make-bed --double-id  --allow-extra-chr --out "$PLINK_PREFIX"
+plink --vcf "$INPUT_VCF" --make-bed \
+      --double-id  \
+      --allow-extra-chr \
+      --out "$PLINK_PREFIX"
 
 # 进行连锁不平衡（LD）修剪
 echo "进行连锁不平衡（LD）修剪"
 plink --bfile "$PLINK_PREFIX" \
       --indep-pairwise 50 10 0.1 \
-	  --allow-extra-chr \
+	--allow-extra-chr \
       --out "${PLINK_PREFIX}_ld_pruned"
 
 # 运行主成分分析（PCA）
