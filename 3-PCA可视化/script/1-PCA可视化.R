@@ -110,8 +110,8 @@ for (i in seq_along(shape_mapping)) {
 # 定义绘图参数
 plot_params <- list(
   # 图形尺寸
-  pdf_width = 20,
-  pdf_height = 15,
+  pdf_width = 20, #* PDF宽度
+  pdf_height = 15, #* PDF高度
   
   # 坐标轴参数
   axis_text_size = 1.5,      # 坐标轴刻度文字大小
