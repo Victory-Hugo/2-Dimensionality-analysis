@@ -13,7 +13,7 @@ library(RColorBrewer)
 # 读取PCA结果数据
 cat("正在读取PCA数据...\n")
 # !注意：请根据实际数据路径修改以下路径
-data <- read.csv("/mnt/f/OneDrive/文档（科研）/脚本/Download/2-Dimensionality-analysis/3-PCA可视化/data/1.csv", header = TRUE)
+data <- read.csv("/mnt/d/幽门螺旋杆菌/Script/分析结果/3-PCA/7544_整体_maf99_SNP-noN/PCA_pop.csv", header = TRUE)
 
 # 数据基本信息
 cat("数据概览:\n")
@@ -53,17 +53,30 @@ cat("\n数据框创建完成，包含", nrow(frame), "个样本\n")
 # 3. 颜色和形状映射设置
 # ============================================================================
 
-# 定义颜色调色板（经典的PCA可视化颜色）
-# 使用RColorBrewer生成符合SCI风格的彩虹色调色板（Set2色系，低饱和度，适合分组展示）
 
-color_palette <- brewer.pal(max(8, length(Class_big_levels)), "Set2")
-if (length(Class_big_levels) > length(color_palette)) {
-    # 超过8类时，扩展色板
-    color_palette <- colorRampPalette(brewer.pal(8, "Set2"))(length(Class_big_levels))
+# ========== 新增：从 color.csv 读取颜色映射 ===========
+color_map_file <- "/mnt/f/OneDrive/文档（科研）/脚本/Download/2-Dimensionality-analysis/3-PCA可视化/conf/color.csv"
+color_df <- read.csv(color_map_file, header = TRUE, stringsAsFactors = FALSE)
+color_map_from_file <- setNames(color_df$color, color_df$Class_big)
+
+# 自动分配颜色的调色板
+auto_palette <- brewer.pal(max(8, length(Class_big_levels)), "Set2")
+if (length(Class_big_levels) > length(auto_palette)) {
+    auto_palette <- colorRampPalette(brewer.pal(8, "Set2"))(length(Class_big_levels))
 }
+auto_palette_idx <- 1
 
-# 为Class_big分配颜色
-color_mapping <- setNames(color_palette[1:length(Class_big_levels)], Class_big_levels)
+color_mapping <- c()
+for (big_class in Class_big_levels) {
+  if (!is.na(color_map_from_file[big_class])) {
+    color_mapping[big_class] <- color_map_from_file[big_class]
+  } else {
+    # 自动分配颜色
+    color_mapping[big_class] <- auto_palette[auto_palette_idx]
+    auto_palette_idx <- auto_palette_idx + 1
+    cat(sprintf("%s类别没有分配颜色，请注意\n", big_class))
+  }
+}
 
 # 定义形状值（R基础绘图支持的点形状）
 shape_palette <- c(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 
@@ -110,23 +123,23 @@ for (i in seq_along(shape_mapping)) {
 # 定义绘图参数
 plot_params <- list(
   # 图形尺寸
-  pdf_width = 20, #* PDF宽度
-  pdf_height = 15, #* PDF高度
+  pdf_width = 40, #* PDF宽度
+  pdf_height = 35, #* PDF高度
   
   # 坐标轴参数
-  axis_text_size = 1.5,      # 坐标轴刻度文字大小
-  axis_label_size = 2.0,     # 坐标轴标签大小
-  title_size = 1.8,          # 标题大小
+  axis_text_size = 2,      # 坐标轴刻度文字大小
+  axis_label_size = 3,     # 坐标轴标签大小
+  title_size = 3,          # 标题大小
   
   # 散点参数
-  point_size = 2.5,          # 散点大小
+  point_size = 3,          # 散点大小
   point_alpha = 0.8,         # 散点透明度（通过颜色实现）
   point_lwd = 3,             # 散点描边粗细
   
   # 图例参数
   legend_text_size = 2,    # 图例文字大小
   legend_point_size = 2,   # 图例中点的大小
-  legend_ncol = 3            # 图例列数
+  legend_ncol = 5            # 图例列数
 )
 
 cat("\n=== 绘图参数 ===\n")
