@@ -8,11 +8,11 @@
 set -e
 
 # 定义输入和输出路径
-INPUT_VCF="/mnt/d/幽门螺旋杆菌/Script/分析结果/1-序列处理流/output/merge/merged_biallelic_7544.NoN.maf99.WGS.recode.SNP.noN.vcf.gz"
-OUTPUT_DIR="/mnt/d/幽门螺旋杆菌/Script/分析结果/4-treemix/data/7544_maf99_SNP-noN"
+INPUT_VCF="/mnt/d/幽门螺旋杆菌/Script/分析结果/1-序列处理流/output/merge_fasta/WGS.aln.fasta.vcf.gz"
+OUTPUT_DIR="/mnt/d/幽门螺旋杆菌/Script/分析结果/4-treemix/data/7544_WGS_aln/filtered"
 mkdir -p "$OUTPUT_DIR"
 PLINK_PREFIX="${OUTPUT_DIR}/filtered"
-PCA_OUTPUT_DIR="/mnt/d/幽门螺旋杆菌/Script/分析结果/4-treemix/data/7544_maf99_SNP-noN"
+PCA_OUTPUT_DIR="/mnt/d/幽门螺旋杆菌/Script/分析结果/4-treemix/data/7544_WGS_aln/filtered_PCA"
 mkdir -p "$PCA_OUTPUT_DIR"
 
 # 将 VCF 转换为 PLINK 二进制格式
