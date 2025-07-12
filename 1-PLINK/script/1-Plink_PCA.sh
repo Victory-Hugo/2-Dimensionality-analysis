@@ -29,12 +29,12 @@ plink --bfile "$PLINK_PREFIX" \
 	--allow-extra-chr \
       --out "${PLINK_PREFIX}_ld_pruned"
 
-# 运行主成分分析（PCA）
-echo "运行主成分分析（PCA）"
-plink --bfile "$PLINK_PREFIX" \
-      --extract "${PLINK_PREFIX}_ld_pruned.prune.in" \
-      --pca 20 \
-	  --allow-extra-chr \
-      --out "${PCA_OUTPUT_DIR}/hpglobal_LD_PCA"
+# # 运行主成分分析（PCA）
+# echo "运行主成分分析（PCA）"
+# plink --bfile "$PLINK_PREFIX" \
+#       --extract "${PLINK_PREFIX}_ld_pruned.prune.in" \
+#       --pca 20 \
+# 	  --allow-extra-chr \
+#       --out "${PCA_OUTPUT_DIR}/hpglobal_LD_PCA"
 
 echo "PCA 分析完成！所有输出文件保存在 ${PCA_OUTPUT_DIR}/ 目录下。"
