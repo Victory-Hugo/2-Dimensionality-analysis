@@ -13,7 +13,7 @@ library(RColorBrewer)
 # 读取PCA结果数据
 cat("正在读取PCA数据...\n")
 # !注意：请根据实际数据路径修改以下路径
-data <- read.csv("/mnt/d/幽门螺旋杆菌/Script/分析结果/3-PCA/7544_整体_maf99_SNP-noN/PCA_pop.csv", header = TRUE)
+data <- read.csv("/mnt/d/幽门螺旋杆菌/Script/分析结果/3-PCA/2899_hpEAsia_maf99_SNP-noN/PCA_pop.csv", header = TRUE)
 
 # 数据基本信息
 cat("数据概览:\n")
@@ -58,7 +58,6 @@ cat("\n数据框创建完成，包含", nrow(frame), "个样本\n")
 color_map_file <- "/mnt/f/OneDrive/文档（科研）/脚本/Download/2-Dimensionality-analysis/3-PCA可视化/conf/color.csv"
 color_df <- read.csv(color_map_file, header = TRUE, stringsAsFactors = FALSE)
 color_map_from_file <- setNames(color_df$color, color_df$Class_big)
-
 # 自动分配颜色的调色板
 auto_palette <- brewer.pal(max(8, length(Class_big_levels)), "Set2")
 if (length(Class_big_levels) > length(auto_palette)) {
@@ -123,7 +122,7 @@ for (i in seq_along(shape_mapping)) {
 # 定义绘图参数
 plot_params <- list(
   # 图形尺寸
-  pdf_width = 40, #* PDF宽度
+  pdf_width = 35, #* PDF宽度
   pdf_height = 35, #* PDF高度
   
   # 坐标轴参数
@@ -305,5 +304,3 @@ summary_stats <- classification_summary %>%
   arrange(Class_big, Class_small)
 
 print(summary_stats)
-
-
