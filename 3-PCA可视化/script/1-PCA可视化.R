@@ -13,7 +13,7 @@ library(RColorBrewer)
 # 读取PCA结果数据
 cat("正在读取PCA数据...\n")
 # !注意：请根据实际数据路径修改以下路径
-data <- read.csv("/mnt/d/幽门螺旋杆菌/Script/分析结果/3-PCA/2899_hpEAsia_maf99_SNP-noN/PCA_pop.csv", header = TRUE)
+data <- read.csv("/mnt/d/幽门螺旋杆菌/Script/分析结果/3-PCA/2819_hpEAsia_maf99/hpglobal_LD_PCA.eigenvec_UMAP_info_no_outlay.csv", header = TRUE)
 
 # 数据基本信息
 cat("数据概览:\n")
@@ -42,7 +42,7 @@ frame <- data.frame(
   ID = data$ID,
   PC1 = PC1,
   PC2 = PC2,
-  PC3 = PC3,
+  PC3 = PC3, #! 如果没有PC3数据，可以注释掉这一行
   Class_big = data$Class_big,
   Class_small = data$Class_small
 )
@@ -304,3 +304,4 @@ summary_stats <- classification_summary %>%
   arrange(Class_big, Class_small)
 
 print(summary_stats)
+
