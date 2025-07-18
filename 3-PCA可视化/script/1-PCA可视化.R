@@ -13,7 +13,7 @@ library(RColorBrewer)
 # 读取PCA结果数据
 cat("正在读取PCA数据...\n")
 # !注意：请根据实际数据路径修改以下路径
-data <- read.csv("/mnt/d/幽门螺旋杆菌/Script/分析结果/3-PCA/2819_hpEAsia_maf99/hpglobal_LD_PCA.eigenvec_UMAP_info_no_outlay.csv", header = TRUE)
+data <- read.csv("/mnt/f/OneDrive/文档（科研）/脚本/Download/2-Dimensionality-analysis/3-PCA可视化/data/example_pca.csv", header = TRUE)
 
 # 数据基本信息
 cat("数据概览:\n")
