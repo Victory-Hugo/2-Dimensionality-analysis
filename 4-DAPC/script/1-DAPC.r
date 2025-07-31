@@ -4,17 +4,18 @@ new_packages <- required_packages[!(required_packages %in% installed.packages()[
 if(length(new_packages)) install.packages(new_packages)
 
 # install.packages("parallel") 
-library(parallel)
+library(parallel) 
 library(adegenet)  # 加载 adegenet 包，用于遗传数据分析
 library(ggplot2)   # 加载 ggplot2 包，用于数据可视化
 library(RColorBrewer)  # 加载 RColorBrewer 包，用于补充颜色
 
 # 定义文件路径
-dfpath <- "C:/Users/victo/Desktop/Manchu_mtDNA.fasta"
-group_info_path <- "C:/Users/victo/Desktop/新建 Text Document.txt" # 注意大小写，请一定保证这个数据第第一列是"ID"，第二列是"Group"
+dfpath <- "/mnt/c/Users/Administrator/Desktop/1.fa"
+group_info_path <- "/mnt/c/Users/Administrator/Desktop/1.txt" # 注意大小写，请一定保证这个数据第第一列是"ID"，第二列是"Group"
 
 # 从 TXT 文件中读取分组信息
-group_info <- read.table(group_info_path, header = TRUE, sep = "\t")
+#* 使用逗号分割，表内必须存在`ID`列
+group_info <- read.table(group_info_path, header = TRUE, sep = ",")
 
 # 检查 group_info 的列名，确保存在 'ID' 列
 if (!"ID" %in% colnames(group_info)) {
