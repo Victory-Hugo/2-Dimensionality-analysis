@@ -35,14 +35,14 @@ cat("Class_small类别 (", length(class_small_levels), "个):", paste(class_smal
 # 提取主成分数据
 PC1 <- data$PC1
 PC2 <- data$PC2  
-PC3 <- data$PC3
+#PC3 <- data$PC3
 
 # 创建完整的数据框
 frame <- data.frame(
   ID = data$ID,
   PC1 = PC1,
   PC2 = PC2,
-  PC3 = PC3, #! 如果没有PC3数据，可以注释掉这一行
+  #PC3 = PC3, #! 如果没有PC3数据，可以注释掉这一行
   Class_big = data$Class_big,
   Class_small = data$Class_small
 )
@@ -304,4 +304,3 @@ summary_stats <- classification_summary %>%
   arrange(Class_big, Class_small)
 
 print(summary_stats)
-
