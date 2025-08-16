@@ -13,7 +13,7 @@ library(RColorBrewer)
 # 读取PCA结果数据
 cat("正在读取PCA数据...\n")
 # !注意：请根据实际数据路径修改以下路径
-data <- read.csv("/mnt/f/OneDrive/文档（科研）/脚本/Download/2-Dimensionality-analysis/3-PCA可视化/data/example_pca.csv", header = TRUE)
+data <- read.csv("/mnt/f/OneDrive/文档（科研）/脚本/Download/2-Dimensionality-analysis/3-PCA可视化/data/example_pcacopy.csv", header = TRUE)
 
 # 数据基本信息
 cat("数据概览:\n")
@@ -275,32 +275,33 @@ cat("\nPDF图形已保存为: PCA_plot_菌株分类.pdf\n")
 # 7. 数据汇总和导出
 # ============================================================================
 
-# 创建详细的分类信息表
-create_classification_summary <- function(data, color_map, shape_map) {
-  summary_table <- data %>%
-    select(ID, Class_big, Class_small, PC1, PC2, PC3) %>%
-    arrange(Class_big, Class_small, ID) %>%
-    mutate(
-      Color = color_map[Class_big],
-      Shape = shape_map[Class_small],
-      Color_Name = names(color_map)[match(Class_big, names(color_map))]
-    )
+# # 创建详细的分类信息表
+# create_classification_summary <- function(data, color_map, shape_map) {
+#   summary_table <- data %>%
+#     select(ID, Class_big, Class_small, PC1, PC2, PC3) %>%
+#     arrange(Class_big, Class_small, ID) %>%
+#     mutate(
+#       Color = color_map[Class_big],
+#       Shape = shape_map[Class_small],
+#       Color_Name = names(color_map)[match(Class_big, names(color_map))]
+#     )
   
-  return(summary_table)
-}
+#   return(summary_table)
+# }
 
-classification_summary <- create_classification_summary(data, color_mapping, shape_mapping)
+# classification_summary <- create_classification_summary(data, color_mapping, shape_mapping)
 
-# 打印汇总信息
-cat("\n=== 分类汇总信息 ===\n")
-summary_stats <- classification_summary %>%
-  group_by(Class_big, Class_small) %>%
-  summarise(
-    Count = n(),
-    Color = first(Color),
-    Shape = first(Shape),
-    .groups = "drop"
-  ) %>%
-  arrange(Class_big, Class_small)
+# # 打印汇总信息
+# cat("\n=== 分类汇总信息 ===\n")
+# summary_stats <- classification_summary %>%
+#   group_by(Class_big, Class_small) %>%
+#   summarise(
+#     Count = n(),
+#     Color = first(Color),
+#     Shape = first(Shape),
+#     .groups = "drop"
+#   ) %>%
+#   arrange(Class_big, Class_small)
 
-print(summary_stats)
+# print(summary_stats)
+
