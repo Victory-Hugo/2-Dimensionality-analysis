@@ -9,11 +9,15 @@ library(RColorBrewer)
 # ============================================================================
 # 1. 数据读取和预处理
 # ============================================================================
+PCA_result_file <- "/mnt/f/1_唐小琼项目/3_PCA/conf/UMAP_for_vis.csv" #!需要有ID列，PC1,PC2列，Class_big列和Class_small列
+color_file <- "/mnt/f/1_唐小琼项目/3_PCA/conf/color.csv" #! 需要有color列和Class_big列
+OUT_pdf_file <- "/mnt/f/1_唐小琼项目/3_PCA/PCA_R_plot_UMAP.pdf" 
+
 
 # 读取PCA结果数据
 cat("正在读取PCA数据...\n")
 # !注意：请根据实际数据路径修改以下路径
-data <- read.csv("/mnt/f/OneDrive/文档（科研）/脚本/Download/2-Dimensionality-analysis/3-PCA可视化/data/example_pcacopy.csv", header = TRUE)
+data <- read.csv(PCA_result_file, header = TRUE)
 
 # 数据基本信息
 cat("数据概览:\n")
@@ -55,7 +59,7 @@ cat("\n数据框创建完成，包含", nrow(frame), "个样本\n")
 
 
 # ========== 新增：从 color.csv 读取颜色映射 ===========
-color_map_file <- "/mnt/f/OneDrive/文档（科研）/脚本/Download/2-Dimensionality-analysis/3-PCA可视化/conf/color.csv"
+color_map_file <- color_file
 color_df <- read.csv(color_map_file, header = TRUE, stringsAsFactors = FALSE)
 color_map_from_file <- setNames(color_df$color, color_df$Class_big)
 # 自动分配颜色的调色板
@@ -154,7 +158,7 @@ cat("\n开始绘制PCA散点图...\n")
 
 # 创建PDF文件
 #! 注意：请根据实际数据路径修改以下路径
-pdf("/mnt/f/OneDrive/文档（科研）/脚本/Download/2-Dimensionality-analysis/3-PCA可视化/output/PCA_R_plot.pdf", width = plot_params$pdf_width, height = plot_params$pdf_height)
+pdf(OUT_pdf_file, width = plot_params$pdf_width, height = plot_params$pdf_height)
 
 # 设置图形布局：上方主图，下方图例
 layout(matrix(c(1, 2)), widths = c(1, 1), heights = c(4, 1))
