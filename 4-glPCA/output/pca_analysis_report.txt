@@ -1,0 +1,9 @@
+analysis_date : 1761272045.40132
+input_file : /mnt/f/OneDrive/文档（科研）/脚本/Download/2-Dimensionality-analysis/4-glPCA/example/example.aln.fasta
+n_individuals : 74
+n_loci : 162
+n_groups : 7
+group_names : C4a2a1b, U5b3a1a, E2b, Z7, M7c1c3, C4a2a1a, B4a1a1b
+variance_pc1_pc2 : 54.9866638703486
+significant_pcs : 4
+potential_outliers : 5
